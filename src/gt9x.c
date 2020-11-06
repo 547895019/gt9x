@@ -260,9 +260,9 @@ static rt_err_t gt9x_control(struct rt_touch_device *device, int cmd, void *data
     return RT_EOK;
 }
 
-static int16_t pre_x[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1};
-static int16_t pre_y[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1};
-static int16_t pre_w[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1};
+static int16_t pre_x[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1,-1, -1, -1, -1, -1};
+static int16_t pre_y[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1,-1, -1, -1, -1, -1};
+static int16_t pre_w[GT9X_MAX_TOUCH] = {-1, -1, -1, -1, -1,-1, -1, -1, -1, -1};
 static rt_uint8_t s_tp_dowm[GT9X_MAX_TOUCH];
 static struct rt_touch_data *read_data;
 

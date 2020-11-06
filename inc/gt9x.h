@@ -14,7 +14,7 @@
 #include "touch.h"
 
 #define GTP_ADDR_LENGTH        (2)
-#define GT9X_MAX_TOUCH       (5)
+#define GT9X_MAX_TOUCH       (10)
 #define GT9X_POINT_INFO_NUM  (8)
 
 #define GT9X_ADDRESS_HIGH    (0x5D)
