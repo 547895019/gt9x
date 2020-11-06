@@ -280,7 +280,7 @@ static void gt9x_touch_up(void *buf, int8_t id)
         read_data[id].event = RT_TOUCH_EVENT_NONE;
     }
 
-    read_data[id].timestamp = rt_touch_get_ts();
+    //read_data[id].timestamp = rt_touch_get_ts();
     read_data[id].width = pre_w[id];
     read_data[id].x_coordinate = pre_x[id];
     read_data[id].y_coordinate = pre_y[id];
@@ -306,7 +306,7 @@ static void gt9x_touch_down(void *buf, int8_t id, int16_t x, int16_t y, int16_t 
         s_tp_dowm[id] = 1;
     }
 
-    read_data[id].timestamp = rt_touch_get_ts();
+    //read_data[id].timestamp = rt_touch_get_ts();
     read_data[id].width = w;
     read_data[id].x_coordinate = x;
     read_data[id].y_coordinate = y;
@@ -323,7 +323,7 @@ static rt_size_t gt9x_read_point(struct rt_touch_device *touch, void *buf, rt_si
     rt_uint8_t touch_num = 0;
     rt_uint8_t write_buf[3];
     rt_uint8_t cmd[2];
-    rt_uint8_t read_buf[8 * GT9X_MAX_TOUCH] = {0};
+    rt_uint8_t read_buf[GT9X_POINT_INFO_NUM * GT9X_MAX_TOUCH] = {0};
     rt_uint8_t read_index;
     int8_t read_id = 0;
     int16_t input_x = 0;
@@ -383,7 +383,7 @@ static rt_size_t gt9x_read_point(struct rt_touch_device *touch, void *buf, rt_si
 
             for (j = 0; j < touch_num; j++)                          /* this time touch num */
             {
-                read_id = read_buf[j * 8] & 0x0F;
+                read_id = read_buf[j * GT9X_POINT_INFO_NUM] & 0x0F;
 
                 if (pre_id[read_index] == read_id)                   /* this id is not free */
                     break;
@@ -404,7 +404,7 @@ static rt_size_t gt9x_read_point(struct rt_touch_device *touch, void *buf, rt_si
 
         for (read_index = 0; read_index < touch_num; read_index++)
         {
-            off_set = read_index * 8;
+            off_set = read_index * GT9X_POINT_INFO_NUM;
             read_id = read_buf[off_set] & 0x0f;
             pre_id[read_index] = read_id;
             input_x = read_buf[off_set + 1] | (read_buf[off_set + 2] << 8);	/* x */
